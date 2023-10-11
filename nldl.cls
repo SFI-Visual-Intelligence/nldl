@@ -1,0 +1,143 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{nldl}[NLDL Style Class]
+
+
+%% Data holders
+\newcommand{\DOI}[1]{\def\@DOI{#1}}
+\newcommand{\paperID}[1]{\def\@paperID{#1}}
+\newcommand{\confYear}[1]{\def\@confYear{#1}}
+
+\DOI{DOI}
+\paperID{\#\#\#}
+\newcommand{\@confName}{NLDL}
+
+%\RequirePackage{datetime2}
+\RequirePackage{pgfmath}
+% Set the conference year to next year from current date
+\pgfmathsetmacro{\@confYear}{int(\the\year+1)}
+
+
+\newcommand{\@type}{\ifabstract Abstract\else Full Paper\fi}
+
+%% Setup
+\RequirePackage[dvipsnames, table]{xcolor}
+
+
+\newif\ifabstract
+\newif\iffinal
+
+% Default full paper
+\abstractfalse
+% Default draft (no final)
+\finalfalse
+
+%% Options
+\DeclareOption{abstract}{\abstracttrue}
+\DeclareOption{fullpaper}{\abstractfalse}
+\DeclareOption{final}{\finaltrue}
+
+\DeclareOption{onecolumn}{\OptionNotUsed}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions\relax
+\LoadClass[10pt,twocolumn,a4paper]{article}
+
+%% Paper setup
+\RequirePackage{geometry}
+\geometry{margin=2cm}
+
+
+%% Title
+
+% author setup
+\RequirePackage{authblk}
+\renewcommand\Affilfont{\small}
+
+\RequirePackage{tcolorbox}
+\tcbuselibrary{skins}
+
+\def\@maketitle{
+  \begin{tcolorbox}[blanker,
+    borderline west={2pt}{0pt}{black!75},
+%    borderline north={2pt}{-10pt}{black}, borderline south={2pt}{-10pt}{black},
+    left=10pt]
+      \vspace*{10pt}
+      {\Large \bf \@title\par}
+      \vspace*{24pt}
+      \iffinal\@author\else%
+      Anonymous \@type\\
+      Submission~\@paperID \fi
+  \end{tcolorbox}
+  \vspace*{15pt}
+}
+
+\RequirePackage{fancyhdr}% http://ctan.org/pkg/fancyhdr
+\RequirePackage{etoolbox}
+
+\ifabstract
+\else
+  \iffinal
+    \fancyhf{}% Clear all headers/footers
+    \renewcommand{\headrulewidth}{0pt}% No header rule
+    \renewcommand{\footrulewidth}{0pt}% No footer rule
+    \lfoot{%\vspace{3ex}
+    \footnotesize{\url{https://doi.org/\@DOI}\\
+    © The author(s). Licensee Septentrio Academic Publishing, Tromsø, Norway. This is an open access article distributed under the terms and conditions of the Creative Commons Attribution license (\url{http://creativecommons.org/licenses/by/4.0/}).}
+    }%
+    \cfoot{\thepage}
+    \apptocmd{\maketitle}{\thispagestyle{fancy}}{}{}
+  \fi
+\fi
+
+
+%% Define linenumber setup
+\RequirePackage[switch, mathlines]{lineno}
+
+% Number setup from ICCV/CVPR
+% NUMBER with left flushed zeros  \fillzeros[<WIDTH>]<NUMBER>
+\newcount\cv@tmpc@ \newcount\cv@tmpc
+\def\fillzeros[#1]#2{\cv@tmpc@=#2\relax\ifnum\cv@tmpc@<0\cv@tmpc@=-\cv@tmpc@\fi
+  \cv@tmpc=1 %
+  \loop\ifnum\cv@tmpc@<10 \else \divide\cv@tmpc@ by 10 \advance\cv@tmpc by 1 \fi
+  \ifnum\cv@tmpc@=10\relax\cv@tmpc@=11\relax\fi \ifnum\cv@tmpc@>10 \repeat
+  \ifnum#2<0\advance\cv@tmpc1\relax-\fi
+  \loop\ifnum\cv@tmpc<#1\relax0\advance\cv@tmpc1\relax\fi \ifnum\cv@tmpc<#1 \repeat
+  \cv@tmpc@=#2\relax\ifnum\cv@tmpc@<0\cv@tmpc@=-\cv@tmpc@\fi \relax\the\cv@tmpc@}%
+
+\renewcommand\thelinenumber{\fillzeros[3]{\arabic{linenumber}}}
+\renewcommand\linenumberfont{\scriptsize\ttfamily\color{NavyBlue}}
+
+\iffinal
+\else
+\linenumbers
+\fi
+
+% Shipout following the logic from ICCV/CVPR
+\RequirePackage{eso-pic}
+\AddToShipoutPicture{%
+  \iffinal\else%
+    \color{NavyBlue}%
+    \def\pid{\parbox{1in}{\begin{center}\scriptsize\bf\sf{\@confName}\\\#\@paperID\end{center}}}%
+    \AtTextUpperLeft{%paperID in corners
+      \put(\LenToUnit{-65pt},\LenToUnit{1cm}){\pid}
+      \put(\LenToUnit{\textwidth\kern-8pt},\LenToUnit{1cm}){\pid}
+    }%
+    \AtTextUpperLeft{%confidential
+      \put(0,\LenToUnit{1cm}){\parbox{\textwidth}{\centering\ttfamily\scriptsize\@confName~\@confYear\quad \@type~Submission \#\@paperID. CONFIDENTIAL REVIEW COPY.  DO NOT DISTRIBUTE.}}
+    }%
+  \fi
+}
+
+
+
+%% Extra macros
+\RequirePackage{xspace}
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+
+\def\eg{\emph{e.g}\onedot} \def\Eg{\emph{E.g}\onedot}
+\def\ie{\emph{i.e}\onedot} \def\Ie{\emph{I.e}\onedot}
+\def\cf{\emph{cf}\onedot} \def\Cf{\emph{Cf}\onedot}
+\def\etc{\emph{etc}\onedot} \def\vs{\emph{vs}\onedot}
+\def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
+\def\iid{i.i.d\onedot} \def\wolog{w.l.o.g\onedot}
+\def\etal{\emph{et al}\onedot}

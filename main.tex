@@ -1,0 +1,88 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Options for the class:
+% 'fullpaper' if you are submitting a 6-page paper or
+% 'abstract' if you are submitting a 2-page extended abstract.
+% 'fullpaper,final' will add a mandatory footer on the titlepage which must contain the DOI. This will be provided once the paper is accepted and everything is ready for publication. This footer is only necessary for full papers.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[fullpaper]{nldl}
+%\documentclass[fullpaper]{nldl}
+%\documentclass[abstract]{nldl}
+
+% Replace '12345' with the DOI of the publication.
+%\DOI{12345}
+\paperID{42}
+% defaults to current year plus one, or you can set it here
+%\confYear{2042}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\usepackage[utf8]{inputenc}
+
+% Figures
+\usepackage{graphicx}
+
+
+% Algorithms
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% References
+\usepackage[
+  backend=biber,% you can change the backend to "bibtex" as well (remember to change the tool chain to use the correct backend)
+  style=numeric-comp,
+  natbib=true,
+]{biblatex}
+
+\addbibresource{references.bib}
+
+% Links and hyperlinks
+\usepackage{hyperref}
+\usepackage{url}
+\hypersetup{
+  colorlinks,
+  linkcolor = BrickRed,
+  citecolor = NavyBlue,
+  urlcolor  = Magenta!80!black,
+}
+
+
+
+% Replace with your title, authors and affiliation
+\title{Northern Lights Deep Learning Conference Template}
+\author[1]{John Doe\thanks{Corresponding Author.}}
+\author[1,2]{Jane Doe}
+\affil[1]{Affiliation 1}
+\affil[2]{Affiliation 2}
+\affil[ ]{\texttt{\{john.doe, jane.doe\}@affiliation.com}}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Deep learning is an emerging subfield in machine learning that has in recent years achieved state-of-the-art performance in image classification, object detection, segmentation, time series prediction and speech recognition to name a few. This conference will gather researchers both on a national and international level to exchange ideas, encourage collaborations and present cutting-edge research.
+\end{abstract}
+
+\section{Introduction}
+The Northern Lights Deep Learning Conference will take place in Troms{\o}, Norway. Being 350 km north of the arctic circle, Troms{\o} is the northernmost city in the world with a population above 75,000. As Troms{\o} is located in the middle of the Northern Lights Oval, the area with highest probability of observing northern lights, there is always a good chance to see them. See Figure~\ref{fig:northernlights} for an example. In general Troms{\o} has a mild climate for such a northerly destination because of its seaside location and the warming effect of the Gulf stream. Troms{\o} is easily accessible from other Norwegian cities and from abroad. More information about Troms{\o} is available at Visit Troms{\o}~\cite{tromso}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\linewidth]{example-image-a}
+    \caption{Northern Lights in Troms{\o}. Photo by courtesy of Luigi Luppino.}
+    \label{fig:northernlights}
+\end{figure}
+
+\section{Submission Guidelines}
+We invite participants to submit in PDF format either 1) a 2-page extended abstract (non-archival) or 2) a 6-page full paper (included in proceedings) in the area of Deep Learning.
+The submissions can be submitted by following the link on the website~\footnote{\url{https://septentrio.uit.no/index.php/nldl/login}}. We accept submission of a maximum size of 20MB and should be in pdf format (two column, font size 10). All submissions will undergo double-blind peer review. It will be up to the authors to ensure the proper anonymization of their paper. Do not include any names or affiliations. Refer to your own past work in the third-person, or if needed insert a blank reference. Accepted contributions will be accepted as contributing talks or poster presentations.
+
+\section{Conclusion}
+We look forward to see you all in Troms{\o} for an engaging and productive conference!
+
+
+\printbibliography
+
+\end{document}
