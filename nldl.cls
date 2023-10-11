@@ -73,17 +73,26 @@
 \RequirePackage{fancyhdr}% http://ctan.org/pkg/fancyhdr
 \RequirePackage{etoolbox}
 
+\newcommand\nomarkfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
 \ifabstract
 \else
   \iffinal
     \fancyhf{}% Clear all headers/footers
     \renewcommand{\headrulewidth}{0pt}% No header rule
     \renewcommand{\footrulewidth}{0pt}% No footer rule
-    \lfoot{%\vspace{3ex}
-    \footnotesize{\url{https://doi.org/\@DOI}\\
-    © The author(s). Licensee Septentrio Academic Publishing, Tromsø, Norway. This is an open access article distributed under the terms and conditions of the Creative Commons Attribution license (\url{http://creativecommons.org/licenses/by/4.0/}).}
-    }%
     \cfoot{\thepage}
+    % Add the CC to the title macro
+    \apptocmd{\maketitle}{%
+    \nomarkfootnote{\url{https://doi.org/\@DOI}}
+    \nomarkfootnote{© The author(s). Licensee Septentrio Academic Publishing, Tromsø, Norway. This is an open access article distributed under the terms and conditions of the Creative Commons Attribution license (\url{http://creativecommons.org/licenses/by/4.0/}).}%
+    }{}{}%
+    % set the fancy style from the title as well
     \apptocmd{\maketitle}{\thispagestyle{fancy}}{}{}
   \fi
 \fi
