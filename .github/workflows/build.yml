@@ -1,0 +1,96 @@
+name: build
+on: [push]
+
+jobs:
+  build-fullpaper:
+    runs-on: ubuntu-latest
+    container:
+      image: adnrv/texlive:adntools
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Compile PDF
+        run: |
+          latexmk -f -pdf -pdflatex="pdflatex -interaction=nonstopmode --shell-escape %O \"\documentclass[fullpaper]{nldl}\renewcommand\documentclass[2][]{}\input{%S}\"" -jobname=main main
+      - name: Move
+        run: mkdir -p artifacts && mv main.pdf ./artifacts/fullpaper-draft.pdf
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: fullpaper-draft
+          path: ./artifacts/fullpaper-draft.pdf
+
+  build-abstract:
+    runs-on: ubuntu-latest
+    container:
+      image: adnrv/texlive:adntools
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Compile PDF
+        run: |
+          latexmk -f -pdf -pdflatex="pdflatex -interaction=nonstopmode --shell-escape %O \"\documentclass[abstract]{nldl}\renewcommand\documentclass[2][]{}\input{%S}\"" -jobname=main main
+      - name: Move
+        run: mkdir -p artifacts && mv main.pdf ./artifacts/abstract-draft.pdf
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: abstract-draft
+          path: ./artifacts/abstract-draft.pdf
+  
+  build-fullpaper-final:
+    runs-on: ubuntu-latest
+    container:
+      image: adnrv/texlive:adntools
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Compile PDF
+        run: |
+          latexmk -f -pdf -pdflatex="pdflatex -interaction=nonstopmode --shell-escape %O \"\documentclass[fullpaper,final]{nldl}\renewcommand\documentclass[2][]{}\input{%S}\"" -jobname=main main
+      - name: Move
+        run: mkdir -p artifacts && mv main.pdf ./artifacts/fullpaper-final.pdf
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: fullpaper-final
+          path: ./artifacts/fullpaper-final.pdf     
+
+  build-abstract-final:
+    runs-on: ubuntu-latest
+    container:
+      image: adnrv/texlive:adntools
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Compile PDF
+        run: |
+          latexmk -f -pdf -pdflatex="pdflatex -interaction=nonstopmode --shell-escape %O \"\documentclass[abstract,final]{nldl}\renewcommand\documentclass[2][]{}\input{%S}\"" -jobname=main main
+      - name: Move
+        run: mkdir -p artifacts && mv main.pdf ./artifacts/abstract-final.pdf
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: abstract-final
+          path: ./artifacts/abstract-final.pdf     
+
+  deploy:
+    needs: [build-fullpaper, build-fullpaper-final, build-abstract, build-abstract-final]
+    runs-on: ubuntu-latest
+    container:
+      image: adnrv/texlive:adntools
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Download main pdf
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ./main.tex
+            ./references.bib
+            ./nldl.cls
