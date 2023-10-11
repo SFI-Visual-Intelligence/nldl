@@ -82,11 +82,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Download main pdf
-        uses: actions/download-artifact@v3
-        with:
-          name: artifacts
-      - name: Release
+      - name: Release code
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
