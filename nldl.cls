@@ -11,7 +11,7 @@
 \paperID{\#\#\#}
 \newcommand{\@confName}{NLDL}
 
-%\RequirePackage{datetime2}
+
 \RequirePackage{pgfmath}
 % Set the conference year to next year from current date
 \pgfmathsetmacro{\@confYear}{int(\the\year+1)}
@@ -136,6 +136,13 @@
   \fi
 }
 
+
+%% Floats
+% Caption setup
+\RequirePackage[labelformat=simple]{subcaption}% note that the format needs to be on the package itself, and not on the caption setup
+\captionsetup{font=small, labelfont={bf}, labelsep=period}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\renewcommand\thesubtable{(\alph{subtable})}
 
 
 %% Extra macros
