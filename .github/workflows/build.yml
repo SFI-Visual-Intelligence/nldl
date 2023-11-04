@@ -8,7 +8,7 @@ jobs:
       image: adnrv/texlive:adntools
     strategy:
       matrix:
-        type: [draft, final]
+        type: [review, final]
         paper: [fullpaper, abstract]
     steps:
       - name: Checkout
