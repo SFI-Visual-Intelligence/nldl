@@ -179,3 +179,44 @@ giveninits=true, % abbreviate the authors names, i.e., put only the initials
   \sort{\field{year}}
   \sort{\field{author}}
 }
+
+% Change the normal space to a non-breaking one between the names and the reference
+% https://tex.stackexchange.com/a/74932/7561
+\renewcommand\namelabeldelim{\addnbspace}
+
+% genetive citations (possessives)
+% https://tex.stackexchange.com/a/307461/7561
+\DeclareNameFormat{labelname:poss}{% Based on labelname from biblatex.def
+  \nameparts{#1}% Not needed if using Biblatex 3.4
+  \ifcase\value{uniquename}%
+  \usebibmacro{name:family}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}%
+  \or
+  \ifuseprefix
+  {\usebibmacro{name:first-last}{\namepartfamily}{\namepartgiveni}{\namepartprefix}{\namepartsuffixi}}
+  {\usebibmacro{name:first-last}{\namepartfamily}{\namepartgiveni}{\namepartprefixi}{\namepartsuffixi}}%
+  \or
+  \usebibmacro{name:first-last}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}%
+  \fi
+  \usebibmacro{name:andothers}%
+  \ifnumequal{\value{listcount}}{\value{liststop}}{'s}{}}
+\DeclareFieldFormat{shorthand:poss}{%
+  \ifnameundef{labelname}{#1's}{#1}}
+\DeclareFieldFormat{citetitle:poss}{\mkbibemph{#1}'s}
+\DeclareFieldFormat{label:poss}{#1's}
+
+\newrobustcmd*{\citealiaspos}{%
+  \AtNextCite{%
+    \DeclareNameAlias{labelname}{labelname:poss}%
+    \DeclareFieldAlias{shorthand}{shorthand:poss}%
+    \DeclareFieldAlias{citetitle}{citetitle:poss}%
+    \DeclareFieldAlias{label}{label:poss}}}
+
+\newrobustcmd*{\citepos}{%
+  \citealiaspos%
+  \textcite}
+
+\newrobustcmd*{\Citepos}{\bibsentence\citepos}
+
+\newrobustcmd*{\Citespos}{%
+  \citealiaspos%
+  \textcites}
