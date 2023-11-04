@@ -1,3 +1,7 @@
+% !TeX spellcheck = en_US
+% !TeX program=pdflatex
+% !BIB program=biber
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Options for the class:
 % 'fullpaper' if you are submitting a 6-page paper or
@@ -51,12 +55,6 @@
 }
 
 % References
-\usepackage[
-  backend=biber,% you can change the backend to "bibtex" as well (remember to change the tool chain to use the correct backend)
-  style=numeric-comp,
-  natbib=true,
-]{biblatex}
-
 \addbibresource{references.bib}
 
 
@@ -99,25 +97,32 @@ More information about Troms{\o} is available at Visit Troms{\o}~\cite{tromso}.
 
 \section{Submission Guidelines}
 We invite participants to submit in PDF format either 1) a 2-page extended abstract (non-archival) or 2) a 6-page full paper (included in proceedings) in the area of Deep Learning.
-The submissions can be submitted by following the link on the website~\footnote{\url{https://septentrio.uit.no/index.php/nldl/login}}. We accept submission of a maximum size of 20MB and should be in pdf format (two column, font size 10). All submissions will undergo double-blind peer review. It will be up to the authors to ensure the proper anonymization of their paper. Do not include any names or affiliations. Refer to your own past work in the third-person, or if needed insert a blank reference. Accepted contributions will be accepted as contributing talks or poster presentations.
-
+The submissions can be submitted by following the instructions on the conference website.\footnote{\url{https://nldl.org}}
+Submissions must be in pdf format (two column, font size 10) using the official NLDL template using the \verb|review| option.
+All submissions will undergo double-blind peer review.
+It will be up to the authors to ensure the proper anonymization of their paper (see Section~\ref{sec:anon}).
+In summary, do not include any names or affiliations, and refer to your own past work in the third-person.
+\textbf{Submissions that violate any of these restrictions will be desk-rejected without going further review.}
+Accepted contributions will be accepted as contributing talks or poster presentations.
 
 \section{Anonymized Submission}
+\label{sec:anon}
 
 To maintain a fair and impartial review process, we require anonymized submissions.
-This means that you must carefully follow these guidelines to ensure that your manuscript conceals your identity during the initial evaluation.
+This means that you must carefully follow these guidelines to ensure that your manuscript conceals your identity during the peer review process.
 
 \noindent\textbf{Personal information.}
 Remove all author names and any personal identifying information from the manuscript, such as author bios or acknowledgments.
 (Note that this does not mean that you cannot cite your previous work.
 See below for details.)
 Similarly, do not include the names of your affiliations or institutions in the manuscript.
-Note that this template \textbf{defaults to the anonymized version} that automatically removes authors' names and institutions.
+Note that this template \textbf{defaults to the anonymized version} (\verb|review|) that automatically removes authors' names and institutions.
 
 \noindent\textbf{Self-References.}
 While it is acceptable to cite your own previous work, do so in the third person to maintain anonymity.
 For example, write, ``Smith et al. [1] explored this concept,'' instead of ``In our previous work [1], we explored this concept.''
-
+Do not remove the name of the authors in any of included references.
+This information is not considered personal information since it will be considered as any other reference.
 
 \section{Camera Ready}
 
@@ -134,9 +139,9 @@ When including a figure or table, use the \verb|\begin{figure}[tb]| or the \verb
 These environments take an optional location parameter.
 You must avoid forcing the floats in place with \verb|!hH|.
 Instead, you should let \LaTeX\ determine the optimal position for your figure or table based on the overall layout of the page, aiming to maintain a clean, coherent layout of the text and figures by using \verb|tb| instead.
-The locations \verb|t| and \verb|b| suggest to LaTeX that it should place the figure or table at the top or bottom of the page if possible, but will not force it to do so.
+The locations \verb|t| and \verb|b| suggest to \LaTeX\ that it should place the figure or table at the top or bottom of the page if possible, but will not force it to do so.
 
-Figure captions should be placed at the bottom while table captions at the top to improve the readability.
+Figure captions should be placed at the bottom while table captions at the top to improve the document's readability.
 Sample usage is below, with the examples displayed in Fig.~\ref{fig:sample} and Table~\ref{tab:sample}.
   \begin{lstlisting}[gobble=2]
   \begin{figure}[tb]
@@ -185,7 +190,7 @@ Mathematical expressions can be inserted into the text either inline or as stand
 However, the \verb|\(...\)| notation is preferred as it offers better error handling.
 If there are any syntax errors within the \verb|\(...\)| delimiters, \LaTeX\ provides more explicit error messages that help in quickly spotting and correcting the issue.
 
-For standalone, block equations, use the \verb|\begin{equation}| and \verb|\end{equation}| commands.
+For standalone, block equations, use the \verb|\begin{equation}| and \verb|\end{equation}| macros.
 This also automatically numbers the equations.
 It is recommended that all mathematical formulas or equations be numbered, whether or not they are explicitly referenced in your text.
 The equation numbers will assist other researchers who may wish to refer to specific parts of your work in their own publications.
@@ -193,36 +198,41 @@ The equation numbers will assist other researchers who may wish to refer to spec
 
 Variables in mathematical expressions should ideally be represented by a single letter, both for subscripts and superscripts.
 In cases where more context or clarity is required by including words or multiple letters, you should escape the word using \verb|\mathit|, \verb|\text|, or \verb|\mathrm|.
-
 For example:
 \begin{equation}
   \mathbf{w}^{\text{(new)}} = \mathbf{w}^{\text{(old)}} - \alpha \frac{\partial \mathcal{L}(\mathbf{w}^{\text{(old)}})}{\partial \mathbf{w}}.
 \end{equation}
 But you should prefer to use $\mathbf{w}^{t}$ instead of the word based superscripts.
+The mathematics in the manuscript should flow within the language and should not appear as standalone pieces.
+You are recommended to review the work of \citet{Knuth1989}.
 
 \item \textbf{Code.}
 For inline code references, use the \verb|\texttt|, \verb|\verb|, or \verb|\lstinline| commands.
 Larger code blocks can be included using the \verb|verbatim| environment.
-If pseudocode or more sophisticated code formatting is needed, use the\verb|algorithm2e| or \verb|listings| packages.
+If pseudocode or more sophisticated code formatting is needed, use the \verb|algorithm2e| or \verb|listings| packages.
 
 Code blocks that follow the text can appear in between the paragraphs.
 For larger pieces that will be referred to in the text, it is better to use an \verb|algorithm| environment and use it as a float element (similar to the figures and tables).
 
 \item \textbf{Citations.}
-This example enables textual and parenthetical citations \verb|\citet| and \verb|\citep|.
+This style enables textual and parenthetical citations \verb|\citet| and \verb|\citep| through the \verb|natbib=true| option in the \verb|biblatex| package.
 Note that citations are not nouns, and you have to use them tied to a noun or a noun-phrase when used as parenthetical citations.
+With parenthetical citations, you should use non-breakable spaces (\verb|~|) between the word and the \verb|\cite| macro (see the usage throughout this document for examples).
 \Eg, you should write ``We refer to some website~\citep{tromso}.''  instead of ``We refer to~\citep{tromso}.''
 Similarly, you can rely on the textual form of the citation instead.
 
 \item \textbf{References.}
-This style uses the BibLaTeX package since it offers a flexible and convenient way to handle bibliographic data.
+This style uses the BibLaTeX package since it offers a modern, flexible, and convenient way to handle bibliographic data.
 Ensure to add your bibliographic database (\verb|.bib| file) within the preamble as \verb|\addbibresource{mybibliography.bib}|.
-
 To display the bibliography, use the \verb|\printbibliography| command to print it out.
 
 In this style, we load the \verb|biblatex| package with the \verb|biber| backend.
 You must ensure the right chain of compilation: \verb|LaTeX => Biber => LaTeX| (twice).
 Many modern \LaTeX\ editors can streamline this process, match your editor preferences accordingly.
+
+\item \textbf{Abbreviations.}
+This style provides a set of the most common academic abbreviations that take care of correct punctuation after them.
+The macros available are: \verb|\eg|, \verb|\Eg|, \verb|\ie|, \verb|\Ie|, \verb|\cf|, \verb|\Cf|, \verb|\etc|, \verb|\vs|, \verb|\wrt|, \verb|\dof|, \verb|\iid|, \verb|\wolog|, and \verb|\etal|.
 
 \end{enumerate}
 
