@@ -1,6 +1,26 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nldl}[NLDL Style Class]
 
+%% Setup the class
+\newif\ifabstract
+\newif\iffinal
+
+% Default full paper
+\abstractfalse
+% Default draft (no final)
+\finalfalse
+
+%% Options
+\DeclareOption{abstract}{\abstracttrue}
+\DeclareOption{fullpaper}{\abstractfalse}
+\DeclareOption{final}{\finaltrue}
+\DeclareOption{review}{\finalfalse}
+
+\DeclareOption{onecolumn}{\OptionNotUsed}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions\relax
+\LoadClass[10pt,twocolumn,a4paper]{article}
+
 
 %% Data holders
 \newcommand{\DOI}[1]{\def\@DOI{#1}}
@@ -22,25 +42,6 @@
 %% Setup
 \RequirePackage[dvipsnames, table]{xcolor}
 
-
-\newif\ifabstract
-\newif\iffinal
-
-% Default full paper
-\abstractfalse
-% Default draft (no final)
-\finalfalse
-
-%% Options
-\DeclareOption{abstract}{\abstracttrue}
-\DeclareOption{fullpaper}{\abstractfalse}
-\DeclareOption{final}{\finaltrue}
-\DeclareOption{draft}{\finalfalse}
-
-\DeclareOption{onecolumn}{\OptionNotUsed}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
-\ProcessOptions\relax
-\LoadClass[10pt,twocolumn,a4paper]{article}
 
 %% Paper setup
 \RequirePackage{geometry}
