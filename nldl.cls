@@ -35,6 +35,7 @@
 \DeclareOption{abstract}{\abstracttrue}
 \DeclareOption{fullpaper}{\abstractfalse}
 \DeclareOption{final}{\finaltrue}
+\DeclareOption{draft}{\finalfalse}
 
 \DeclareOption{onecolumn}{\OptionNotUsed}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
