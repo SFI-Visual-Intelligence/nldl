@@ -159,3 +159,23 @@
 \def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
 \def\iid{i.i.d\onedot} \def\wolog{w.l.o.g\onedot}
 \def\etal{\emph{et al}\onedot}
+
+
+%% Citations
+\RequirePackage[
+backend=biber,% you can change the backend to "bibtex" as well (remember to change the tool chain to use the correct backend)
+style=numeric-comp,
+sorting=noneyear,
+natbib=true, % add citep and citet
+maxbibnames=99, % authors on bibliography
+maxcitenames=2, % authors on citations
+giveninits=true, % abbreviate the authors names, i.e., put only the initials
+]{biblatex}
+
+% Sorts by appearance globally and by year within the citation
+% https://tex.stackexchange.com/a/55451/7561
+\DeclareSortingTemplate{noneyear}{
+  \sort{\citeorder}
+  \sort{\field{year}}
+  \sort{\field{author}}
+}
