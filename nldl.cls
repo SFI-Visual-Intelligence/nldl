@@ -45,7 +45,7 @@
 
 %% Paper setup
 \RequirePackage{geometry}
-\geometry{margin=2cm}
+\geometry{margin=2.5cm}
 
 
 %% Title
@@ -152,14 +152,15 @@
 \DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
 \def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
 
-\def\eg{\emph{e.g}\onedot} \def\Eg{\emph{E.g}\onedot}
-\def\ie{\emph{i.e}\onedot} \def\Ie{\emph{I.e}\onedot}
-\def\cf{\emph{cf}\onedot} \def\Cf{\emph{Cf}\onedot}
-\def\etc{\emph{etc}\onedot} \def\vs{\emph{vs}\onedot}
-\def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
+\def\eg{e.g\onedot} \def\Eg{E.g\onedot}
+\def\ie{i.e\onedot} \def\Ie{I.e\onedot}
+\def\cf{cf\onedot} \def\Cf{Cf\onedot}
+\def\aka{a.k.a\onedot} \def\Aka{A.k.a\onedot}
+\def\etc{etc\onedot} \def\vs{vs\onedot}
 \def\iid{i.i.d\onedot} \def\wolog{w.l.o.g\onedot}
-\def\etal{\emph{et al}\onedot}
-
+\def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
+\def\etal{et al\onedot}
+\def\adhoc{ad hoc\xspace}
 
 %% Citations
 \RequirePackage[
