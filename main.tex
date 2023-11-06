@@ -21,10 +21,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\usepackage[utf8]{inputenc}
-\usepackage{microtype}
-
-
 %% Math
 \usepackage{mathtools}
 
@@ -95,7 +91,9 @@ Troms{\o} is easily accessible from other Norwegian cities and from abroad.
 More information about Troms{\o} is available at Visit Troms{\o}~\cite{tromso}.
 
 \section{Submission Guidelines}
-We invite participants to submit in PDF format either (1)~a 2-page extended abstract (non-archival), using the \verb|abstract| option, or (2)~a 6-page full paper (included in proceedings) in the area of Deep Learning, using the \verb|fullpaper| option.
+We invite participants to submit in PDF format either (1)~a 2-page extended abstract (non-archival), using the \verb|abstract| option, or (2)~a 5-page full paper (included in proceedings) in the area of Deep Learning, using the \verb|fullpaper| option.
+The submissions can have an appendix with unlimited number of pages with supplementary material and information that do not fit in the main paper.
+However, \textbf{the reviewers are not obliged to read the appendix}---thus, all your main results and points must be maid in the main paper.
 The submissions can be submitted by following the instructions on the conference website.\footnote{\url{https://nldl.org}}
 Submissions must be in pdf format (two column, font size 10) using the official NLDL template using the \verb|review| option.
 All submissions will undergo double-blind peer review.
@@ -127,6 +125,9 @@ This information is not considered personal information since it will be conside
 
 Use \verb|final| in the options of the class to produce the camera ready version.
 This will automatically remove the line numbers and will de-anonymized the submission.
+For the camera ready, the authors can have 1 more page to address the comments from the reviewers.
+That is, the page limit in the camera ready is 6~pages (in comparison to the 5~pages limit in the original submission).
+Note that the appendix is still unlimited.
 
 \section{Style Guidelines}
 
@@ -242,5 +243,24 @@ We look forward to see you all in Troms{\o} for an engaging and productive confe
 
 
 \printbibliography
+
+\appendix
+\section{Example of the Appendix}
+
+The purpose of this appendix is to provide additional explanations and clarifications for certain aspects of the paper.
+While these explanations can enhance the understanding of the proposed method, they are not considered essential to the main content of the paper.
+Reviewers are not required to read this appendix, as the main information necessary for evaluating the paper is contained within the main paper itself.
+
+The information provided in this appendix includes detailed descriptions of figures, additional analysis, and further discussions related to the proposed method.
+It aims to provide supplementary insights.
+For example, Fig.~\ref{fig:sample-app} must provide additional information, but it shouldn't be needed to evaluate the paper.
+Similarly, the authors shouldn't expect the reviewers to read the appendix to fully understand the paper.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=\linewidth]{example-image-b}
+  \caption{This is a sample image that the reviewers are not forced to read or review.}
+  \label{fig:sample-app}
+\end{figure}
 
 \end{document}
