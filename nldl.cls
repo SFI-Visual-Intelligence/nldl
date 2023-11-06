@@ -221,3 +221,18 @@ giveninits=true, % abbreviate the authors names, i.e., put only the initials
 \newrobustcmd*{\Citespos}{%
   \citealiaspos%
   \textcites}
+
+
+%% Apendix
+\RequirePackage{chngcntr}
+
+\let\@oldappendix\appendix
+\renewcommand{\appendix}{%
+  \@oldappendix
+  \counterwithin{figure}{section}
+  \counterwithin{table}{section}
+  \counterwithin{algorithm}{section}
+}
+
+%% Typesetting
+\RequirePackage{microtype}
