@@ -9,8 +9,8 @@
 % 'review' (is the default) will anonymize the submission and will add the review line numers.
 % 'final' will add a mandatory footer on the titlepage which must contain the DOI. This will be provided once the paper is accepted and everything is ready for publication. This footer is only necessary for full papers.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\documentclass[fullpaper,final]{nldl}
-\documentclass[fullpaper]{nldl}
+\documentclass[fullpaper,final]{nldl}
+%\documentclass[fullpaper]{nldl}
 %\documentclass[abstract]{nldl}
 
 % Replace '12345' with the DOI of the publication.
@@ -57,6 +57,7 @@
 \usepackage{hyperref}
 \usepackage{url}
 \hypersetup{
+  pdfusetitle,
   colorlinks,
   linkcolor = BrickRed,
   citecolor = NavyBlue,
@@ -108,14 +109,14 @@ Accepted contributions will be accepted as contributing talks or poster presenta
 To maintain a fair and impartial review process, we require anonymized submissions.
 This means that you must carefully follow these guidelines to ensure that your manuscript conceals your identity during the peer review process.
 
-\noindent\textbf{Personal information.}
+\textbf{Personal information.}
 Remove all author names and any personal identifying information from the manuscript, such as author bios or acknowledgments.
 (Note that this does not mean that you cannot cite your previous work.
 See below for details.)
 Similarly, do not include the names of your affiliations or institutions in the manuscript.
 Note that this template \textbf{defaults to the anonymized version} (\verb|review|) that automatically removes authors' names and institutions.
 
-\noindent\textbf{Self-References.}
+\textbf{Self-References.}
 While it is acceptable to cite your own previous work, do so in the third person to maintain anonymity.
 For example, write, ``Smith et al. [1] explored this concept,'' instead of ``In our previous work [1], we explored this concept.''
 Do not remove the name of the authors in any of included references.
