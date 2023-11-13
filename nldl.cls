@@ -82,6 +82,14 @@
   \endgroup
 }
 
+\newcommand\flushnomarkfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{\hspace*{-1.8em}#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+
 \ifabstract
 \else
   \iffinal
@@ -91,8 +99,8 @@
     \cfoot{\thepage}
     % Add the CC to the title macro
     \apptocmd{\maketitle}{%
-    \nomarkfootnote{\url{https://doi.org/\@DOI}}
-    \nomarkfootnote{© The author(s). Licensee Septentrio Academic Publishing, Tromsø, Norway. This is an open access article distributed under the terms and conditions of the Creative Commons Attribution license (\url{http://creativecommons.org/licenses/by/4.0/}).}%
+    \flushnomarkfootnote{\\\url{https://doi.org/\@DOI}}
+    \flushnomarkfootnote{Copyright \@confYear\ by the author(s). Licensee Septentrio Academic Publishing, Tromsø, Norway. This is an open access article distributed under the terms and conditions of the Creative Commons Attribution license (\url{http://creativecommons.org/licenses/by/4.0/}).}%
     }{}{}%
     % set the fancy style from the title as well
     \apptocmd{\maketitle}{\thispagestyle{fancy}}{}{}
