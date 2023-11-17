@@ -24,7 +24,7 @@
 
 %% Data holders
 \newcommand{\paperID}[1]{\def\@paperID{#1}}
-\newcommand{\confYear}[1]{\def\@confYear{#1}}
+\newcommand{\confYear}[1]{\def\@confYear{#1}\updateNum}
 \newcommand{\confNum}[1]{\def\@confNum{#1}}
 \newcommand{\vol}[1]{\def\@vol{#1}}
 
@@ -36,8 +36,8 @@
 \RequirePackage{pgfmath}
 % Set the conference year to next year from current date
 \pgfmathsetmacro{\@confYear}{int(\the\year+1)}
-\pgfmathsetmacro{\@confNum}{int(\@confYear-2019)}
-
+\newcommand{\updateNum}{\pgfmathsetmacro{\@confNum}{int(\@confYear-2019)}}
+\updateNum
 
 \newcommand{\@type}{\ifabstract Abstract\else Full Paper\fi}
 
