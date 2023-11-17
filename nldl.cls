@@ -23,18 +23,20 @@
 
 
 %% Data holders
-\newcommand{\DOI}[1]{\def\@DOI{#1}}
 \newcommand{\paperID}[1]{\def\@paperID{#1}}
 \newcommand{\confYear}[1]{\def\@confYear{#1}}
+\newcommand{\confNum}[1]{\def\@confNum{#1}}
+\newcommand{\vol}[1]{\def\@vol{#1}}
 
-\DOI{DOI}
 \paperID{\#\#\#}
+\vol{V}
 \newcommand{\@confName}{NLDL}
 
 
 \RequirePackage{pgfmath}
 % Set the conference year to next year from current date
 \pgfmathsetmacro{\@confYear}{int(\the\year+1)}
+\pgfmathsetmacro{\@confNum}{int(\@confYear-2019)}
 
 
 \newcommand{\@type}{\ifabstract Abstract\else Full Paper\fi}
@@ -93,15 +95,31 @@
 \ifabstract
 \else
   \iffinal
+    \RequirePackage{nth}
+    % Clean the authors from authblk
+    % https://tex.stackexchange.com/a/620322/7561
+    \newcommand*{\AB@cleanauthors}{%
+      \begingroup
+      \renewcommand\footnotemark[1][]{}% ignore \footnotemark
+      \let\footnote\@gobble% ignore \footnote
+      \let\thanks\@gobble% ignore \thanks
+      \let\textsuperscript\@gobble% ignore protected \textsuperscript
+      \expandafter\let\csname textsuperscript \endcsname\@gobble
+      \let\Authfont\relax% do not use a special font
+      \def\Authand{, }% separate list of authors by ,
+%      \ifnum\value{authors}<3 % one ore two authors
+      \AB@authlist% show them all
+%      \else% 3 or more authors
+%      \ABgetauthor{1}\,et~al.
+%      \fi
+      \endgroup
+    }
+
     \fancyhf{}% Clear all headers/footers
     \renewcommand{\headrulewidth}{0pt}% No header rule
     \renewcommand{\footrulewidth}{0pt}% No footer rule
-    \cfoot{\thepage}
-    % Add the CC to the title macro
-    \apptocmd{\maketitle}{%
-    \flushnomarkfootnote{\\\url{https://doi.org/\@DOI}}
-    \flushnomarkfootnote{Copyright \@confYear\ by the author(s). Licensee Septentrio Academic Publishing, Tromsø, Norway. This is an open access article distributed under the terms and conditions of the Creative Commons Attribution license (\url{http://creativecommons.org/licenses/by/4.0/}).}%
-    }{}{}%
+    \lfoot{\footnotesize%
+      Proceedings of the \nth{\@confNum} Northern Lights Deep Learning Conference (NLDL). PMLR Vol.~\@vol.\newline\copyright\space\@confYear\space\AB@cleanauthors.}
     % set the fancy style from the title as well
     \apptocmd{\maketitle}{\thispagestyle{fancy}}{}{}
   \fi
