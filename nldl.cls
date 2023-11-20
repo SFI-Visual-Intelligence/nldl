@@ -106,7 +106,8 @@
       \let\textsuperscript\@gobble% ignore protected \textsuperscript
       \expandafter\let\csname textsuperscript \endcsname\@gobble
       \let\Authfont\relax% do not use a special font
-      \def\Authand{, }% separate list of authors by ,
+      \def\Authand{ \& }% shorten the and
+      \def\Authands{, \& }% shorten the and with more than one
 %      \ifnum\value{authors}<3 % one ore two authors
       \AB@authlist% show them all
 %      \else% 3 or more authors
@@ -119,7 +120,7 @@
     \renewcommand{\headrulewidth}{0pt}% No header rule
     \renewcommand{\footrulewidth}{0pt}% No footer rule
     \lfoot{\footnotesize%
-      Proceedings of the \nth{\@confNum} Northern Lights Deep Learning Conference (NLDL). PMLR Vol.~\@vol.\newline\copyright\space\@confYear\space\AB@cleanauthors.}
+      Proceedings of the \nth{\@confNum} Northern Lights Deep Learning Conference (NLDL), PMLR Vol.~\@vol,  \@confYear.\newline\copyright\space\@confYear\space\AB@cleanauthors.}
     % set the fancy style from the title as well
     \apptocmd{\maketitle}{\thispagestyle{fancy}}{}{}
   \fi
