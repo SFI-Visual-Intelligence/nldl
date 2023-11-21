@@ -4,7 +4,7 @@ This repository contains the LaTeX style template for the NLDL Conference. The t
 
 ## Usage
 
-To use the NLDL Conference style template, simply download the `authorkit.zip` file from the [latest release](https://github.com/SFI-Visual-Intelligence/nldl/releases/), and extract the `nldl.cls` into your working directory or in your local `texmf`.
+To use the NLDL Conference style template, simply download the `authorkit.zip` file from the [latest release](https://github.com/SFI-Visual-Intelligence/nldl/releases/), and extract the `nldl.cls` into your working directory or in your local `texmf`.  See details about the [installation](#installation) as well.
 
 Use it in your document as a class:
 ```
@@ -13,8 +13,44 @@ Use it in your document as a class:
 
 Additionally, you can use the `main.tex` as a guideline for your paper, and delete all the information within the `document` environment.
 
+## Installation
+
+You can install the template in your local `texmf` instead of downloading it in your local directory.
+
+### Download
+
+You can use the code below to download the latest release and unpack it in your home for TeX and Metafont (`texmfhome`).
+
+```bash
+# Fetch where you have your texmf home
+texmf=$(kpsewhich --var-value TEXMFHOME)
+# In case you don't have the structure, you have to create it
+mkdir -p ${texmf}/tex/latex/
+cd ${texmf}/tex/latex
+wget https://github.com/SFI-Visual-Intelligence/nldl/releases/latest/download/authorkit.zip
+unzip authorkit.zip -d nldl
+rm authorkit.zip
+```
+
+### Clone
+
+The following code will clone the release for `NLDLYYYY` repository into your local TeX and Metafont home.  For instance, if you want to download the version from `NLDL0042` then you should use this value after `--branch` option replacing `NLDLYYYY`. 
+
+```bash
+# Fetch where you have your texmf home
+texmf=$(kpsewhich --var-value TEXMFHOME)
+# In case you don't have the structure, you have to create it
+mkdir -p ${texmf}/tex/latex/
+# Clone the latest repo
+git clone git@github.com:SFI-Visual-Intelligence/nldl.git --branch NLDLYYYY
+```
+
+If you omit the `--branch NLDLYYYY` option, you will get the latest version of the NLDL template.
+
 ## Contributions
 
 Contributions to this repository are welcome in the form of bug reports, feature requests, and merge requests. If you encounter any issues with the style template or notice any errors or inconsistencies, please report them in the issue tracker. Merge requests with fixes for these issues are also welcome and will be reviewed promptly.
 
 Please note that all contributions should be made in accordance with the standards and guidelines provided by the NLDL Conference.
+
+
