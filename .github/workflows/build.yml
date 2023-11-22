@@ -39,9 +39,7 @@ jobs:
       - name: Download PDFs
         uses: actions/download-artifact@v3
       - name: Zip the PDFs
-        run: |
-        
-        zip --junk-paths templates.zip fullpaper-review/fullpaper-review.pdf fullpaper-final/fullpaper-final.pdf abstract-review/abstract-review.pdf abstract-final/abstract-final.pdf
+        run: zip --junk-paths templates.zip fullpaper-review/fullpaper-review.pdf fullpaper-final/fullpaper-final.pdf abstract-review/abstract-review.pdf abstract-final/abstract-final.pdf
       - name: Release code
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
