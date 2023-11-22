@@ -4,14 +4,14 @@ This repository contains the LaTeX style template for the NLDL Conference. The t
 
 ## Usage
 
-To use the NLDL Conference style template, simply download the `authorkit.zip` file from the [latest release](https://github.com/SFI-Visual-Intelligence/nldl/releases/), and extract the `nldl.cls` into your working directory or in your local `texmf`.  See details about the [installation](#installation) as well.
+To use the NLDL Conference style template, simply download the [`authorkit.zip` file](https://github.com/SFI-Visual-Intelligence/nldl/releases/latest/download/authorkit.zip) from the [latest release](https://github.com/SFI-Visual-Intelligence/nldl/releases/latest), and extract the `nldl.cls` into your working directory or in your local `texmf`.  See details about the [installation](#installation) as well.
 
 Use it in your document as a class:
 ```
 \documentclass[fullpaper]{nldl}
 ```
 
-Additionally, you can use the `main.tex` as a guideline for your paper, and delete all the information within the `document` environment.
+Additionally, you can use the `main.tex` as a guideline for your paper, and delete all the information within the `document` environment.  You should familiarize yourself with the guidelines in any of the templates available in the [`templates.zip` file](https://github.com/SFI-Visual-Intelligence/nldl/releases/latest/download/templates.zip) from the [latest release](https://github.com/SFI-Visual-Intelligence/nldl/releases/latest).
 
 ## Installation
 
