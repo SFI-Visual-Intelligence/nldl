@@ -121,7 +121,7 @@
     \renewcommand{\headrulewidth}{0pt}% No header rule
     \renewcommand{\footrulewidth}{0pt}% No footer rule
     \lfoot{\scriptsize%
-      Proceedings of the \nth{\@confNum} Northern Lights Deep Learning Conference (NLDL), PMLR Vol.~\@vol,  \@confYear.\newline\faIcon{creative-commons}\,\faIcon{creative-commons-by}\space\@confYear\space\AB@cleanauthors.  This is an open access article distributed under the terms and conditions of the Creative Commons Attribution license (\url{http://creativecommons.org/licenses/by/4.0/}).}
+      Proceedings of the \nth{\@confNum} Northern Lights Deep Learning Conference (NLDL), PMLR~\@vol,  \@confYear.\newline\faIcon{creative-commons}\,\faIcon{creative-commons-by}\space\@confYear\space\AB@cleanauthors.  This is an open access article distributed under the terms and conditions of the Creative Commons Attribution license (\url{http://creativecommons.org/licenses/by/4.0/}).}
     % set the fancy style from the title as well
     \apptocmd{\maketitle}{\thispagestyle{fancy}}{}{}
   \fi
