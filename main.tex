@@ -159,7 +159,7 @@ The locations \verb|t| and \verb|b| suggest to \LaTeX\ that it should place the 
 
 Figure captions should be placed at the bottom while table captions at the top to improve the document's readability.
 Sample usage is below, with the examples displayed in Fig.~\ref{fig:sample} and Table~\ref{tab:sample}.
-  \begin{lstlisting}[gobble=2]
+\begin{lstlisting}[gobble=2]
   \begin{figure}[tb]
     \centering
     \includegraphics[width=\linewidth]{example-image-a}
@@ -200,6 +200,68 @@ Sample usage is below, with the examples displayed in Fig.~\ref{fig:sample} and 
     \bottomrule
   \end{tabular}
 \end{table}
+
+\textbf{You must avoid having floating elements beyond the column margins.}
+In case you have floating elements (tables or figures) that go outside of the column margins, you can resize them to fit the column with with \verb|\resizebox{\linewidth}{!}{<float>}|.
+For instance, if you have a table wider than the column, as in Table~\ref{tab:wrong-width}, you can adjust the content with the \verb|\resizebox| macro, as in Table~\ref{tab:fixed-width}.
+\begin{lstlisting}[gobble=2]
+  \begin{table}[tb]
+    \centering
+    \caption{This is a sample table with the wrong width since it goes outside of the margins. \textbf{Do not do this!}}
+    \label{tab:wrong-width}
+    \begin{tabular}{lcrrr}
+      \toprule
+      Column1 & Column2 & Column3 & Column4 & Col5 \\
+      \midrule
+      1 & 2 & 3 & 4 & 5 \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+
+  \begin{table}[tb]
+    \centering
+    \caption{This is the correct way of setting Table~\ref{tab:wrong-width}.}
+    \label{tab:fixed-width}
+    \resizebox{\linewidth}{!}{%
+      \begin{tabular}{lcrrr}
+        \toprule
+        Column1 & Column2 & Column3 & Column4 & Col5 \\
+        \midrule
+        1 & 2 & 3 & 4 & 5 \\
+        \bottomrule
+    \end{tabular}}
+  \end{table}
+\end{lstlisting}
+
+\begin{table}[tb]
+  \centering
+  \caption{This is a sample table with the wrong width since it goes outside of the margins. \textbf{Do not do this!}}
+  \label{tab:wrong-width}
+  \begin{tabular}{lcrrr}
+    \toprule
+    Column1 & Column2 & Column3 & Column4 & Col5 \\
+    \midrule
+    1 & 2 & 3 & 4 & 5 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[tb]
+  \centering
+  \caption{This is the correct way of setting Table~\ref{tab:wrong-width}.}
+  \label{tab:fixed-width}
+  \resizebox{\linewidth}{!}{%
+  \begin{tabular}{lcrrr}
+    \toprule
+    Column1 & Column2 & Column3 & Column4 & Col5 \\
+    \midrule
+    1 & 2 & 3 & 4 & 5 \\
+    \bottomrule
+  \end{tabular}}
+\end{table}
+
+Note that you must resize the content and not the float.
+That is, you must resize \verb|tabular| environment or the \verb|\includegraphics| macro instead of the \verb|figure| or \verb|table| environments.
 
 \item \textbf{Mathematics.}
 Mathematical expressions can be inserted into the text either inline or as standalone entities. For inline mathematical expressions, you can use either the \verb|$$...$$| or \verb|\(...\)| delimiters.
