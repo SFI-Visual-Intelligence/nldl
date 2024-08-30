@@ -12,14 +12,14 @@ jobs:
         paper: [fullpaper, abstract]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Compile PDF
         run: |
           latexmk -f -pdf -pdflatex="pdflatex -interaction=nonstopmode --shell-escape %O \"\documentclass[${{ matrix.paper }},${{ matrix.type }}]{nldl}\renewcommand\documentclass[2][]{}\input{%S}\"" -jobname=main main
       - name: Move
         run: mv main.pdf ./${{ matrix.paper }}-${{ matrix.type }}.pdf
       - name: Upload PDF as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.paper }}-${{ matrix.type }}
           path: ./${{ matrix.paper }}-${{ matrix.type }}.pdf
@@ -31,19 +31,19 @@ jobs:
       image: adnrv/texlive:adntools
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install zip
         run: apt update -qq && apt install -y zip
       - name: Zip code
         run: zip --junk-paths authorkit.zip main.tex nldl.cls references.bib 
       - name: Download PDFs
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
       - name: Zip the PDFs
         run: zip --junk-paths templates.zip fullpaper-review/fullpaper-review.pdf fullpaper-final/fullpaper-final.pdf abstract-review/abstract-review.pdf abstract-final/abstract-final.pdf
       - name: Move PDFs
         run: mv fullpaper-review/fullpaper-review.pdf fullpaper-instructions.pdf
       - name: Release code
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
