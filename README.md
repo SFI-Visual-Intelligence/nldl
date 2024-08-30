@@ -11,7 +11,7 @@ Use it in your document as a class:
 \documentclass[fullpaper]{nldl}
 ```
 
-Additionally, you can use the `main.tex` as a guideline for your paper, and delete all the information within the `document` environment.  You should familiarize yourself with the guidelines in any of the templates available in the [`templates.zip` file](https://github.com/SFI-Visual-Intelligence/nldl/releases/latest/download/templates.zip) from the [latest release](https://github.com/SFI-Visual-Intelligence/nldl/releases/latest).
+Additionally, you can use the `main.tex` as a guideline for your paper, and delete all the information within the `document` environment.  You should familiarize yourself with the guidelines in the [`fullpaper-instructions.pdf` file](https://github.com/SFI-Visual-Intelligence/nldl/releases/latest/download/fullpaper-instructions.pdf) or in any of the compiled templates available  in the [`templates.zip` file](https://github.com/SFI-Visual-Intelligence/nldl/releases/latest/download/templates.zip) from the [latest release](https://github.com/SFI-Visual-Intelligence/nldl/releases/latest).
 
 ## Installation
 
