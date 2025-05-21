@@ -1,6 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nldl}[NLDL Style Class]
 
+\RequirePackage{etoolbox}
+
 %% Setup the class
 \newif\ifabstract
 \newif\iffinal
@@ -67,9 +69,13 @@
       \vspace*{10pt}
       {\Large \bf \@title\par}
       \vspace*{24pt}
-      \iffinal\@author\else%
-      Anonymous \@type\\
-      Submission~\@paperID \fi
+      \ifboolexpr{bool{final} or bool{abstract} }%
+      {% true
+        \@author%
+      }{% false
+        Anonymous \@type\\
+        Submission~\@paperID
+      }
   \end{tcolorbox}
   \vspace*{15pt}
 }
